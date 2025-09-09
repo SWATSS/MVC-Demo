@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Routing.Constraints;
+
 namespace EmptyProjectG03
 {
     public class Program
@@ -58,6 +60,28 @@ namespace EmptyProjectG03
             }
 
             app.MapGet("/", () => "Hello World!");
+            app.MapGet("/Index", () => "Hellow From Index!");
+
+            //app.MapControllerRoute(
+            //        name: "Default",
+            //        pattern: "{controller=Movies}/{action=Index}/{id:regex(^\\d{2}$)?}/{name:alpha?}"
+            //        //pattern: "{Controller=Movies }/{Action=Index}/{Id:int?",
+            //        //defaults: new { Actrion = "Index", Controller = "Movies" },
+            //        /*constraints: new { Id = @"\d{2}" }*/// Digits {2 numbers (10, 12, 50)}
+            //        //constraints : new { Id = new IntRouteConstraint()}
+            //    );
+            app.MapControllerRoute(
+                name: "Default",
+                pattern: "{controller=Movies}/{action=Index}/{id:regex(^\\d{{2}}$)?}/{name:alpha?}"
+            );
+
+
+            //app.MapGet("/{name}", async context =>
+            //app.MapGet("/X{name}", async context =>
+            //{
+            //    //var Name = context.GetRouteValue("name");
+            //    await context.Response.WriteAsync($"Hello {context.Request.RouteValues["name"]}");
+            //    });
 
             app.Run();
 
